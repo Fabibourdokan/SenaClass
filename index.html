@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard do Sistema de Agendamento de Salas">
+  <title>SenaClass | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span></div>
+      <div>
+        <strong>SenaClass</strong>
+        <small>Gestao de salas</small>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Navegacao principal">
+      <p class="nav-label">Menu principal</p>
+      <a class="nav-item active" href="#dashboard"><span class="nav-icon">⌂</span>Dashboard</a>
+      <a class="nav-item" href="#salas"><span class="nav-icon">▦</span>Salas</a>
+      <a class="nav-item" href="#agendamentos"><span class="nav-icon">◷</span>Agendamentos</a>
+      <a class="nav-item" href="#novo-agendamento"><span class="nav-icon">＋</span>Novo agendamento</a>
+      <a class="nav-item" href="#relatorios"><span class="nav-icon">▤</span>Relatorios</a>
+    </nav>
+
+    <div class="quick-filters">
+      <div class="filter-heading"><span class="filter-symbol">≡</span><span>Filtros rapidos</span></div>
+      <label for="room-filter">Sala</label>
+      <select id="room-filter">
+        <option>Todas as salas</option>
+        <option>Sala A</option>
+        <option>Sala B</option>
+        <option>Sala C</option>
+      </select>
+      <label for="date-filter">Periodo</label>
+      <div class="date-input"><span aria-hidden="true">▣</span><input id="date-filter" value="18/08/2026 - 22/08/2026" aria-label="Periodo selecionado"></div>
+      <button class="clear-button" id="clear-filters" type="button">Limpar filtros <span>↗</span></button>
+    </div>
+
+    <div class="sidebar-footer"><span class="status-dot"></span>Sistema online</div>
+  </aside>
+
+  <main class="app-shell" id="dashboard">
+    <header class="topbar">
+      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="Abrir menu">☰</button>
+      <div class="topbar-right">
+        <button class="notification-button" type="button" aria-label="Notificacoes"><span class="notification-dot"></span>♧</button>
+        <div class="profile">
+          <div class="avatar">AD</div>
+          <div class="profile-copy"><strong>Administrador</strong><small>Coordenação</small></div>
+          <span class="profile-chevron">⌄</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrap">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">Visao geral <span></span> Sexta, 21 de agosto</p>
+          <h1>Dashboard</h1>
+          <p class="welcome">Bem-vindo(a) ao sistema de agendamento de salas.</p>
+        </div>
+        <button class="primary-button" type="button" id="new-booking"><span>＋</span>Novo agendamento</button>
+      </section>
+
+      <section class="status-section" id="salas" aria-labelledby="status-title">
+        <div class="section-heading"><div><p class="section-kicker">Disponibilidade agora</p><h2 id="status-title">Status das salas</h2></div><a href="#grade" class="text-link">Ver todas <span>→</span></a></div>
+        <div class="room-cards">
+          <article class="room-card free" data-room="Sala A">
+            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala A</h3></div><span class="room-status">Livre</span></div>
+            <div class="room-meta"><span>♙ Capacidade</span><strong>40 pessoas</strong></div>
+            <div class="equipment"><span>20 computadores</span><span>Projetor</span><span>Ar-condicionado</span><span>Quadro branco</span></div>
+            <div class="next-booking"><span class="next-icon">◷</span><div><small>Proximo agendamento</small><strong>Hoje, 13:30 <b>—</b> Programacao</strong></div></div>
+          </article>
+          <article class="room-card busy" data-room="Sala B">
+            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala B</h3></div><span class="room-status">Ocupado</span></div>
+            <div class="room-meta"><span>♙ Capacidade</span><strong>30 pessoas</strong></div>
+            <div class="equipment"><span>Projetor</span><span>TV</span><span>Ar-condicionado</span><span>Quadro branco</span></div>
+            <div class="next-booking"><span class="next-icon">◉</span><div><small>Ocupada ate 17:30</small><strong>Banco de Dados <b>—</b> Tarde</strong></div></div>
+          </article>
+          <article class="room-card free" data-room="Sala C">
+            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala C</h3></div><span class="room-status">Livre</span></div>
+            <div class="room-meta"><span>♙ Capacidade</span><strong>60 pessoas</strong></div>
+            <div class="equipment"><span>30 computadores</span><span>Projetor</span><span>Caixas de som</span><span>Ar-condicionado</span></div>
+            <div class="next-booking"><span class="next-icon">◷</span><div><small>Proximo agendamento</small><strong>Hoje, 19:00 <b>—</b> Engenharia de Software</strong></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="schedule-section" id="grade" aria-labelledby="schedule-title">
+        <div class="section-heading schedule-heading"><div><p class="section-kicker">Planejamento semanal</p><h2 id="schedule-title">Grade de aulas da semana</h2></div><div class="schedule-actions"><button class="outline-button" id="today-button" type="button">Hoje</button><button class="square-button" id="previous-week" type="button" aria-label="Semana anterior">‹</button><button class="square-button" id="next-week" type="button" aria-label="Proxima semana">›</button><div class="week-display"><span>▣</span><strong id="week-label">18/08/2026 - 22/08/2026</strong></div></div></div>
+        <div class="schedule-board" aria-label="Grade semanal de aulas">
+          <div class="board-header time-header">Horario</div><div class="board-header">Segunda <small>18 AGO</small></div><div class="board-header">Terca <small>19 AGO</small></div><div class="board-header">Quarta <small>20 AGO</small></div><div class="board-header">Quinta <small>21 AGO</small></div><div class="board-header">Sexta <small>22 AGO</small></div>
+          <div class="time-slot morning"><strong>08:00</strong><span>10:00</span></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>08:00 - 10:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>08:00 - 10:00 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>08:00 - 10:00 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>08:00 - 10:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>08:00 - 10:00 · Sala A</small></button></div>
+          <div class="time-slot"><strong>10:00</strong><span>12:00</span></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>10:00 - 12:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>10:00 - 12:00 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>10:00 - 12:00 · Sala B</small></button></div><div class="class-cell empty"></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>10:00 - 12:00 · Sala B</small></button></div>
+          <div class="time-slot afternoon"><strong>13:30</strong><span>15:30</span></div><div class="class-cell"><button class="class-block yellow" data-room="Sala C"><b>Inteligencia Artificial</b><small>13:30 - 15:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>13:30 - 15:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>13:30 - 15:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>13:30 - 15:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>13:30 - 15:30 · Sala C</small></button></div>
+          <div class="time-slot"><strong>15:30</strong><span>17:30</span></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>15:30 - 17:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>15:30 - 17:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>15:30 - 17:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>15:30 - 17:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>15:30 - 17:30 · Sala A</small></button></div>
+          <div class="time-slot evening"><strong>19:00</strong><span>20:30</span></div><div class="class-cell"><button class="class-block blue" data-room="Sala B"><b>Redes de Computadores</b><small>19:00 - 20:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>19:00 - 20:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>19:00 - 20:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>19:00 - 20:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>19:00 - 20:30 · Sala B</small></button></div>
+          <div class="time-slot"><strong>20:30</strong><span>22:30</span></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>20:30 - 22:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>20:30 - 22:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block yellow" data-room="Sala C"><b>Inteligencia Artificial</b><small>20:30 - 22:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>20:30 - 22:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>20:30 - 22:30 · Sala B</small></button></div>
+        </div>
+        <div class="schedule-footer"><div class="legend"><strong>Legenda de salas</strong><span><i class="legend-dot sala-a"></i>Sala A</span><span><i class="legend-dot sala-b"></i>Sala B</span><span><i class="legend-dot sala-c"></i>Sala C</span></div><p>Clique em um agendamento para ver mais detalhes. <span>↗</span></p></div>
+      </section>
+    </div>
+  </main>
+  <div class="modal-backdrop" id="booking-modal" hidden>
+    <section class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+      <div class="modal-header">
+        <div><p class="section-kicker">Agenda academica</p><h2 id="booking-title">Novo agendamento</h2></div>
+        <button class="modal-close" id="close-modal" type="button" aria-label="Fechar formulario">×</button>
+      </div>
+      <form id="booking-form">
+        <div class="form-field full-field"><label for="class-name">Nome da aula</label><input id="class-name" name="className" type="text" placeholder="Ex.: Desenvolvimento Web" required></div>
+        <div class="form-row"><div class="form-field"><label for="booking-room">Sala</label><select id="booking-room" name="room" required><option value="">Selecione</option><option>Sala A</option><option>Sala B</option><option>Sala C</option></select></div><div class="form-field"><label for="booking-day">Dia</label><select id="booking-day" name="day" required><option value="">Selecione</option><option value="0">Segunda-feira</option><option value="1">Terca-feira</option><option value="2">Quarta-feira</option><option value="3">Quinta-feira</option><option value="4">Sexta-feira</option></select></div></div>
+        <div class="form-row"><div class="form-field"><label for="booking-start">Inicio</label><select id="booking-start" name="start" required><option value="">Selecione</option><option>08:00</option><option>10:00</option><option>13:30</option><option>15:30</option><option>19:00</option><option>20:30</option></select></div><div class="form-field"><label for="booking-end">Fim</label><select id="booking-end" name="end" required><option value="">Selecione</option><option>10:00</option><option>12:00</option><option>15:30</option><option>17:30</option><option>20:30</option><option>22:30</option></select></div></div>
+        <div class="form-field full-field"><label for="booking-date">Data</label><input id="booking-date" name="date" type="date" value="2026-08-21" required></div>
+        <p class="form-error" id="form-error" role="alert"></p>
+        <div class="modal-actions"><button class="cancel-button" id="cancel-modal" type="button">Cancelar</button><button class="primary-button" type="submit"><span>＋</span>Salvar agendamento</button></div>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
