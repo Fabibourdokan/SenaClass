@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard do Sistema de Agendamento de Salas">
-  <title>SenaClass | Dashboard</title>
+  <meta name="description" content="Dashboard do sistema de agendamento de salas">
+  <title>Dashboard | Agendamento de Salas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true"><span></span></div>
-      <div>
-        <strong>SenaClass</strong>
-        <small>Gestao de salas</small>
-      </div>
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="img"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M8 3v4M16 3v4M4 9h16M8 13h2M14 13h2M8 16h2"></path></svg>
+      </span>
+      <span class="brand-copy"><small>SENACLASS</small><span>Sistema de<br><strong>Agendamento</strong></span></span>
     </div>
 
-    <nav class="main-nav" aria-label="Navegacao principal">
-      <p class="nav-label">Menu principal</p>
-      <a class="nav-item active" href="#dashboard"><span class="nav-icon">⌂</span>Dashboard</a>
-      <a class="nav-item" href="#salas"><span class="nav-icon">▦</span>Salas</a>
-      <a class="nav-item" href="#agendamentos"><span class="nav-icon">◷</span>Agendamentos</a>
-      <a class="nav-item" href="#novo-agendamento"><span class="nav-icon">＋</span>Novo agendamento</a>
-      <a class="nav-item" href="#relatorios"><span class="nav-icon">▤</span>Relatorios</a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="nav-link active" href="#dashboard"><span class="nav-icon">⌂</span>Dashboard</a>
+      <a class="nav-link" href="#salas"><span class="nav-icon">▦</span>Salas</a>
+      <a class="nav-link" href="#agenda"><span class="nav-icon">◷</span>Agendamentos</a>
+      <a class="nav-link new-booking-link" href="#novo"><span class="nav-icon plus">+</span>Novo Agendamento</a>
+      <a class="nav-link report-link" href="#relatorios"><span class="nav-icon">▤</span>Relatórios</a>
+      <a class="nav-link user-area-link" href="#usuario"><span class="nav-icon">◌</span>Área do usuário</a>
     </nav>
 
-    <div class="quick-filters">
-      <div class="filter-heading"><span class="filter-symbol">≡</span><span>Filtros rapidos</span></div>
+    <section class="quick-filters" aria-labelledby="quick-filter-title">
+      <div class="filter-heading">
+        <span class="filter-icon">☷</span>
+        <h2 id="quick-filter-title">Filtros rápidos</h2>
+      </div>
       <label for="room-filter">Sala</label>
       <select id="room-filter">
         <option>Todas as salas</option>
@@ -38,93 +40,594 @@
         <option>Sala B</option>
         <option>Sala C</option>
       </select>
-      <label for="date-filter">Periodo</label>
-      <div class="date-input"><span aria-hidden="true">▣</span><input id="date-filter" value="18/08/2026 - 22/08/2026" aria-label="Periodo selecionado"></div>
-      <button class="clear-button" id="clear-filters" type="button">Limpar filtros <span>↗</span></button>
-    </div>
+      <label for="date-filter">Período</label>
+      <div class="period-picker-wrap">
+        <input id="date-filter" type="text" value="18/08/2026 - 22/08/2026" aria-label="Período selecionado" readonly>
+        <input id="week-picker" class="week-picker" type="date" aria-label="Escolher semana">
+        <span class="picker-icon" aria-hidden="true">▣</span>
+      </div>
+      <button class="clear-button" type="button">Limpar filtros</button>
+    </section>
 
-    <div class="sidebar-footer"><span class="status-dot"></span>Sistema online</div>
+    <div class="sidebar-footer"><span class="status-dot"></span> Sistema online</div>
   </aside>
 
-  <main class="app-shell" id="dashboard">
+  <main class="main-content" id="dashboard">
     <header class="topbar">
-      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="Abrir menu">☰</button>
-      <div class="topbar-right">
-        <button class="notification-button" type="button" aria-label="Notificacoes"><span class="notification-dot"></span>♧</button>
-        <div class="profile">
-          <div class="avatar">AD</div>
-          <div class="profile-copy"><strong>Administrador</strong><small>Coordenação</small></div>
-          <span class="profile-chevron">⌄</span>
-        </div>
+      <button class="icon-button menu-button" type="button" aria-label="Abrir menu">☰</button>
+      <div class="user-area">
+        <button class="icon-button notification-button" type="button" aria-label="Notificações"><span class="notification-dot"></span>♢</button>
+        <span class="avatar">AD</span>
+        <div class="user-copy"><strong>Administrador</strong><small>Gestor do sistema</small></div>
+        <span class="chevron">⌄</span>
       </div>
     </header>
 
-    <div class="content-wrap">
-      <section class="page-heading">
+    <div class="page-content">
+      <section class="welcome-section" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">Visao geral <span></span> Sexta, 21 de agosto</p>
-          <h1>Dashboard</h1>
-          <p class="welcome">Bem-vindo(a) ao sistema de agendamento de salas.</p>
+          <p class="eyebrow">VISÃO GERAL <span></span> 18 A 22 AGO 2026</p>
+          <h1 id="page-title">Dashboard</h1>
+          <p class="subtitle">Bem-vindo(a) ao sistema de agendamento de salas.</p>
         </div>
-        <button class="primary-button" type="button" id="new-booking"><span>＋</span>Novo agendamento</button>
+        <button class="primary-button" id="new-booking-button" type="button"><span>+</span> Novo agendamento</button>
       </section>
 
-      <section class="status-section" id="salas" aria-labelledby="status-title">
-        <div class="section-heading"><div><p class="section-kicker">Disponibilidade agora</p><h2 id="status-title">Status das salas</h2></div><a href="#grade" class="text-link">Ver todas <span>→</span></a></div>
+      <section class="section-block" id="salas" aria-labelledby="room-status-title">
+        <div class="section-heading">
+          <div><h2 id="room-status-title">Status das Salas</h2><p>Acompanhe a disponibilidade em tempo real</p></div>
+          <span class="updated-label"><span class="live-dot"></span> Atualizado agora</span>
+        </div>
         <div class="room-cards">
-          <article class="room-card free" data-room="Sala A">
-            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala A</h3></div><span class="room-status">Livre</span></div>
-            <div class="room-meta"><span>♙ Capacidade</span><strong>40 pessoas</strong></div>
-            <div class="equipment"><span>20 computadores</span><span>Projetor</span><span>Ar-condicionado</span><span>Quadro branco</span></div>
-            <div class="next-booking"><span class="next-icon">◷</span><div><small>Proximo agendamento</small><strong>Hoje, 13:30 <b>—</b> Programacao</strong></div></div>
+          <article class="room-card available">
+            <div class="room-card-top"><div><span class="room-kicker">SALA A</span><h3>Sala A</h3></div><span class="room-status">Livre</span></div>
+            <div class="room-meta"><span>◉</span> 40 pessoas</div>
+            <div class="equipment"><span>Equipamentos</span><p>20 computadores, projetor,<br>ar-condicionado, quadro branco</p></div>
+            <div class="next-booking"><span class="calendar-small">▣</span><div><small>Próximo agendamento</small><strong>Hoje, 13:30 <i>—</i> Programação</strong></div></div>
           </article>
-          <article class="room-card busy" data-room="Sala B">
-            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala B</h3></div><span class="room-status">Ocupado</span></div>
-            <div class="room-meta"><span>♙ Capacidade</span><strong>30 pessoas</strong></div>
-            <div class="equipment"><span>Projetor</span><span>TV</span><span>Ar-condicionado</span><span>Quadro branco</span></div>
-            <div class="next-booking"><span class="next-icon">◉</span><div><small>Ocupada ate 17:30</small><strong>Banco de Dados <b>—</b> Tarde</strong></div></div>
+          <article class="room-card busy">
+            <div class="room-card-top"><div><span class="room-kicker">SALA B</span><h3>Sala B</h3></div><span class="room-status">Ocupado</span></div>
+            <div class="room-meta"><span>◉</span> 30 pessoas</div>
+            <div class="equipment"><span>Equipamentos</span><p>Projetor, TV, ar-condicionado,<br>quadro branco</p></div>
+            <div class="next-booking"><span class="calendar-small">▣</span><div><small>Em uso até 17:30</small><strong>Banco de Dados <i>—</i> Tarde</strong></div></div>
           </article>
-          <article class="room-card free" data-room="Sala C">
-            <div class="room-card-top"><div class="room-name"><span class="room-dot"></span><h3>Sala C</h3></div><span class="room-status">Livre</span></div>
-            <div class="room-meta"><span>♙ Capacidade</span><strong>60 pessoas</strong></div>
-            <div class="equipment"><span>30 computadores</span><span>Projetor</span><span>Caixas de som</span><span>Ar-condicionado</span></div>
-            <div class="next-booking"><span class="next-icon">◷</span><div><small>Proximo agendamento</small><strong>Hoje, 19:00 <b>—</b> Engenharia de Software</strong></div></div>
+          <article class="room-card available">
+            <div class="room-card-top"><div><span class="room-kicker">SALA C</span><h3>Sala C</h3></div><span class="room-status">Livre</span></div>
+            <div class="room-meta"><span>◉</span> 60 pessoas</div>
+            <div class="equipment"><span>Equipamentos</span><p>30 computadores, projetor,<br>caixas de som, ar-condicionado</p></div>
+            <div class="next-booking"><span class="calendar-small">▣</span><div><small>Próximo agendamento</small><strong>Hoje, 19:00 <i>—</i> Engenharia de Software</strong></div></div>
           </article>
         </div>
       </section>
 
-      <section class="schedule-section" id="grade" aria-labelledby="schedule-title">
-        <div class="section-heading schedule-heading"><div><p class="section-kicker">Planejamento semanal</p><h2 id="schedule-title">Grade de aulas da semana</h2></div><div class="schedule-actions"><button class="outline-button" id="today-button" type="button">Hoje</button><button class="square-button" id="previous-week" type="button" aria-label="Semana anterior">‹</button><button class="square-button" id="next-week" type="button" aria-label="Proxima semana">›</button><div class="week-display"><span>▣</span><strong id="week-label">18/08/2026 - 22/08/2026</strong></div></div></div>
-        <div class="schedule-board" aria-label="Grade semanal de aulas">
-          <div class="board-header time-header">Horario</div><div class="board-header">Segunda <small>18 AGO</small></div><div class="board-header">Terca <small>19 AGO</small></div><div class="board-header">Quarta <small>20 AGO</small></div><div class="board-header">Quinta <small>21 AGO</small></div><div class="board-header">Sexta <small>22 AGO</small></div>
-          <div class="time-slot morning"><strong>08:00</strong><span>10:00</span></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>08:00 - 10:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>08:00 - 10:00 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>08:00 - 10:00 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>08:00 - 10:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>08:00 - 10:00 · Sala A</small></button></div>
-          <div class="time-slot"><strong>10:00</strong><span>12:00</span></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>10:00 - 12:00 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>10:00 - 12:00 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>10:00 - 12:00 · Sala B</small></button></div><div class="class-cell empty"></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>10:00 - 12:00 · Sala B</small></button></div>
-          <div class="time-slot afternoon"><strong>13:30</strong><span>15:30</span></div><div class="class-cell"><button class="class-block yellow" data-room="Sala C"><b>Inteligencia Artificial</b><small>13:30 - 15:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>13:30 - 15:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>13:30 - 15:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>13:30 - 15:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>13:30 - 15:30 · Sala C</small></button></div>
-          <div class="time-slot"><strong>15:30</strong><span>17:30</span></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>15:30 - 17:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>15:30 - 17:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>15:30 - 17:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>15:30 - 17:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>15:30 - 17:30 · Sala A</small></button></div>
-          <div class="time-slot evening"><strong>19:00</strong><span>20:30</span></div><div class="class-cell"><button class="class-block blue" data-room="Sala B"><b>Redes de Computadores</b><small>19:00 - 20:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>19:00 - 20:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block mint" data-room="Sala C"><b>Engenharia de Software</b><small>19:00 - 20:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block peach" data-room="Sala A"><b>Programacao</b><small>19:00 - 20:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>19:00 - 20:30 · Sala B</small></button></div>
-          <div class="time-slot"><strong>20:30</strong><span>22:30</span></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Banco de Dados</b><small>20:30 - 22:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>20:30 - 22:30 · Sala B</small></button></div><div class="class-cell"><button class="class-block yellow" data-room="Sala C"><b>Inteligencia Artificial</b><small>20:30 - 22:30 · Sala C</small></button></div><div class="class-cell"><button class="class-block blue" data-room="Sala A"><b>Redes de Computadores</b><small>20:30 - 22:30 · Sala A</small></button></div><div class="class-cell"><button class="class-block lilac" data-room="Sala B"><b>Sistemas Operacionais</b><small>20:30 - 22:30 · Sala B</small></button></div>
+      <section class="section-block schedule-section" id="agenda" aria-labelledby="schedule-title">
+        <div class="section-heading schedule-heading">
+          <div><h2 id="schedule-title">Grade de Aulas da Semana</h2><p>Visualize todos os agendamentos por dia e horário</p></div>
+          <div class="schedule-actions"><button class="today-button" type="button">Hoje</button><button class="round-button" type="button" aria-label="Semana anterior">‹</button><button class="round-button" type="button" aria-label="Próxima semana">›</button><span class="date-range">18/08/2026 <b>—</b> 22/08/2026</span></div>
         </div>
-        <div class="schedule-footer"><div class="legend"><strong>Legenda de salas</strong><span><i class="legend-dot sala-a"></i>Sala A</span><span><i class="legend-dot sala-b"></i>Sala B</span><span><i class="legend-dot sala-c"></i>Sala C</span></div><p>Clique em um agendamento para ver mais detalhes. <span>↗</span></p></div>
+
+        <div class="schedule-table" role="table" aria-label="Aulas agendadas da semana">
+          <div class="schedule-row schedule-header" role="row"><div class="time-cell" role="columnheader">HORÁRIO</div><div class="day-header" data-day-index="0" role="columnheader">SEGUNDA <small>18 AGO</small></div><div class="day-header" data-day-index="1" role="columnheader">TERÇA <small>19 AGO</small></div><div class="day-header" data-day-index="2" role="columnheader">QUARTA <small>20 AGO</small></div><div class="day-header" data-day-index="3" role="columnheader">QUINTA <small>21 AGO</small></div><div class="day-header" data-day-index="4" role="columnheader">SEXTA <small>22 AGO</small></div></div>
+          <div class="schedule-row" role="row"><div class="time-cell" role="rowheader"><strong>MANHÃ</strong><span>08:00 - 12:00</span></div><div class="lesson-col"><div class="lesson programming"><b>Programação</b><span>08:00 - 10:00 · Sala A</span></div><div class="lesson networks"><b>Redes de Computadores</b><span>10:00 - 12:00 · Sala A</span></div></div><div class="lesson-col"><div class="lesson software"><b>Engenharia de Software</b><span>08:00 - 10:00 · Sala C</span></div><div class="lesson software"><b>Engenharia de Software</b><span>10:00 - 12:00 · Sala C</span></div></div><div class="lesson-col"><div class="lesson database"><b>Banco de Dados</b><span>08:00 - 10:00 · Sala B</span></div><div class="lesson database"><b>Banco de Dados</b><span>10:00 - 12:00 · Sala B</span></div></div><div class="lesson-col"><div class="lesson programming"><b>Programação</b><span>08:00 - 10:00 · Sala A</span></div><div class="empty-slot"></div></div><div class="lesson-col"><div class="lesson networks"><b>Redes de Computadores</b><span>08:00 - 10:00 · Sala A</span></div><div class="lesson systems"><b>Sistemas Operacionais</b><span>10:00 - 12:00 · Sala B</span></div></div></div>
+          <div class="schedule-row" role="row"><div class="time-cell" role="rowheader"><strong>TARDE</strong><span>13:30 - 17:30</span></div><div class="lesson-col"><div class="lesson artificial"><b>Inteligência Artificial</b><span>13:30 - 15:30 · Sala C</span></div><div class="lesson programming"><b>Programação</b><span>15:30 - 17:30 · Sala A</span></div></div><div class="lesson-col"><div class="lesson software"><b>Engenharia de Software</b><span>13:30 - 15:30 · Sala C</span></div><div class="lesson software"><b>Engenharia de Software</b><span>15:30 - 17:30 · Sala C</span></div></div><div class="lesson-col"><div class="lesson systems"><b>Sistemas Operacionais</b><span>13:30 - 15:30 · Sala B</span></div><div class="lesson database"><b>Banco de Dados</b><span>15:30 - 17:30 · Sala B</span></div></div><div class="lesson-col"><div class="lesson programming"><b>Programação</b><span>13:30 - 15:30 · Sala A</span></div><div class="lesson networks"><b>Redes de Computadores</b><span>15:30 - 17:30 · Sala A</span></div></div><div class="lesson-col"><div class="lesson software"><b>Engenharia de Software</b><span>13:30 - 15:30 · Sala C</span></div><div class="lesson programming"><b>Programação</b><span>15:30 - 17:30 · Sala A</span></div></div></div>
+          <div class="schedule-row" role="row"><div class="time-cell" role="rowheader"><strong>NOITE</strong><span>19:00 - 22:30</span></div><div class="lesson-col"><div class="lesson networks"><b>Redes de Computadores</b><span>19:00 - 20:30 · Sala B</span></div><div class="lesson database"><b>Banco de Dados</b><span>20:30 - 22:30 · Sala B</span></div></div><div class="lesson-col"><div class="lesson programming"><b>Programação</b><span>19:00 - 20:30 · Sala A</span></div><div class="lesson systems"><b>Sistemas Operacionais</b><span>20:30 - 22:30 · Sala B</span></div></div><div class="lesson-col"><div class="lesson software"><b>Engenharia de Software</b><span>19:00 - 20:30 · Sala C</span></div><div class="lesson artificial"><b>Inteligência Artificial</b><span>20:30 - 22:30 · Sala C</span></div></div><div class="lesson-col"><div class="lesson programming"><b>Programação</b><span>19:00 - 20:30 · Sala A</span></div><div class="lesson networks"><b>Redes de Computadores</b><span>20:30 - 22:30 · Sala A</span></div></div><div class="lesson-col"><div class="lesson database"><b>Banco de Dados</b><span>19:00 - 20:30 · Sala B</span></div><div class="lesson systems"><b>Sistemas Operacionais</b><span>20:30 - 22:30 · Sala B</span></div></div></div>
+        </div>
+        <div class="holiday-notice" id="holiday-notice" role="status" hidden></div>
+        <div class="schedule-footer"><div class="legend"><strong>Legenda de Salas</strong><span><i class="legend-dot sala-a"></i>Sala A</span><span><i class="legend-dot sala-b"></i>Sala B</span><span><i class="legend-dot sala-c"></i>Sala C</span></div><p>Clique em um agendamento para ver mais detalhes.</p></div>
       </section>
     </div>
   </main>
-  <div class="modal-backdrop" id="booking-modal" hidden>
-    <section class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
-      <div class="modal-header">
-        <div><p class="section-kicker">Agenda academica</p><h2 id="booking-title">Novo agendamento</h2></div>
-        <button class="modal-close" id="close-modal" type="button" aria-label="Fechar formulario">×</button>
-      </div>
-      <form id="booking-form">
-        <div class="form-field full-field"><label for="class-name">Nome da aula</label><input id="class-name" name="className" type="text" placeholder="Ex.: Desenvolvimento Web" required></div>
-        <div class="form-row"><div class="form-field"><label for="booking-room">Sala</label><select id="booking-room" name="room" required><option value="">Selecione</option><option>Sala A</option><option>Sala B</option><option>Sala C</option></select></div><div class="form-field"><label for="booking-day">Dia</label><select id="booking-day" name="day" required><option value="">Selecione</option><option value="0">Segunda-feira</option><option value="1">Terca-feira</option><option value="2">Quarta-feira</option><option value="3">Quinta-feira</option><option value="4">Sexta-feira</option></select></div></div>
-        <div class="form-row"><div class="form-field"><label for="booking-start">Inicio</label><select id="booking-start" name="start" required><option value="">Selecione</option><option>08:00</option><option>10:00</option><option>13:30</option><option>15:30</option><option>19:00</option><option>20:30</option></select></div><div class="form-field"><label for="booking-end">Fim</label><select id="booking-end" name="end" required><option value="">Selecione</option><option>10:00</option><option>12:00</option><option>15:30</option><option>17:30</option><option>20:30</option><option>22:30</option></select></div></div>
-        <div class="form-field full-field"><label for="booking-date">Data</label><input id="booking-date" name="date" type="date" value="2026-08-21" required></div>
-        <p class="form-error" id="form-error" role="alert"></p>
-        <div class="modal-actions"><button class="cancel-button" id="cancel-modal" type="button">Cancelar</button><button class="primary-button" type="submit"><span>＋</span>Salvar agendamento</button></div>
+
+  <main class="user-view" id="usuario" hidden>
+    <header class="user-view-header"><div><p class="eyebrow">SENAC <span></span> ÁREA DO USUÁRIO</p><h1>Solicitar agendamento</h1><p class="subtitle">Reserve uma sala para sua aula ou atividade.</p></div><button class="secondary-button back-admin-button" type="button">Voltar ao administrador</button></header>
+    <section class="user-layout">
+      <form class="request-card" id="user-booking-form">
+        <div class="card-heading"><div><h2>Nova solicitação</h2><p>Escolha uma data dentro dos próximos seis meses.</p></div><span class="request-badge">Solicitação</span></div>
+        <label>Disciplina ou atividade<input name="subject" type="text" placeholder="Ex.: Oficina de design" required></label>
+        <div class="user-form-grid"><label>Sala<select name="room" required><option>Sala A</option><option>Sala B</option><option>Sala C</option></select></label><label>Data<input name="date" type="date" required></label></div>
+        <label>Período<select name="time" required><option>08:00 - 10:00</option><option>10:00 - 12:00</option><option>13:30 - 15:30</option><option>15:30 - 17:30</option><option>19:00 - 20:30</option><option>20:30 - 22:30</option></select></label>
+        <label>Observações<textarea name="notes" rows="3" placeholder="Informe detalhes para o administrador (opcional)"></textarea></label>
+        <div class="user-form-error" id="user-form-error" role="alert" hidden></div><button class="primary-button" type="submit">Solicitar agendamento</button>
       </form>
+      <aside class="user-info"><div class="user-profile"><span class="large-avatar">US</span><div><strong>Usuário padrão</strong><small>Solicitante Senac</small></div></div><h2>Regras de reserva</h2><ul><li>Reservas disponíveis por até 6 meses.</li><li>Uma sala não pode ter dois agendamentos no mesmo horário.</li><li>Solicitações em feriados devem ser verificadas pelo administrador.</li></ul><div class="user-history"><h2>Minhas solicitações</h2><p id="user-history-empty">Nenhuma solicitação nesta sessão.</p><div id="user-history-list"></div></div></aside>
+    </section>
+    <section class="user-rooms" aria-labelledby="user-rooms-title">
+      <div class="section-heading"><div><h2 id="user-rooms-title">Escolha sua sala</h2><p>Confira a capacidade e os recursos antes de solicitar.</p></div><span class="updated-label"><span class="live-dot"></span> Disponibilidade atual</span></div>
+      <div class="user-room-cards">
+        <button class="user-room-card available" type="button" data-room="Sala A"><span class="room-kicker">SALA A</span><strong>Sala A</strong><span class="room-status">Livre</span><span class="user-room-capacity">40 pessoas</span><small>20 computadores, projetor,<br>ar-condicionado, quadro branco</small><em>Selecionar sala</em></button>
+        <button class="user-room-card busy" type="button" data-room="Sala B"><span class="room-kicker">SALA B</span><strong>Sala B</strong><span class="room-status">Ocupado</span><span class="user-room-capacity">30 pessoas</span><small>Projetor, TV, ar-condicionado,<br>quadro branco</small><em>Selecionar sala</em></button>
+        <button class="user-room-card available" type="button" data-room="Sala C"><span class="room-kicker">SALA C</span><strong>Sala C</strong><span class="room-status">Livre</span><span class="user-room-capacity">60 pessoas</span><small>30 computadores, projetor,<br>caixas de som, ar-condicionado</small><em>Selecionar sala</em></button>
+      </div>
+    </section>
+  </main>
+
+  <div class="login-screen" id="login-screen" hidden>
+    <div class="login-brand"><span class="brand-mark">S</span><strong>SENACLASS</strong></div>
+    <section class="login-card"><p class="eyebrow">SENAC <span></span> ACESSO SEGURO</p><h1>Bem-vindo de volta</h1><p class="subtitle">Entre para solicitar e acompanhar reservas de salas.</p><form id="login-form"><label>E-mail<input name="email" type="email" placeholder="seu.email@senac.br" required></label><label>Senha<input name="password" type="password" placeholder="Digite sua senha" required></label><label class="remember"><input type="checkbox"> Lembrar deste dispositivo</label><button class="primary-button" type="submit">Entrar</button></form><p class="login-hint">Demonstração: escolha o perfil após entrar.</p></section>
+  </div>
+
+  <div class="modal-backdrop" id="booking-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="Fechar janela">×</button>
+      <p class="eyebrow">AGENDA <span></span></p>
+      <h2 id="modal-title">Novo agendamento</h2>
+      <p class="modal-subtitle">Preencha os dados para reservar uma sala.</p>
+      <form id="booking-form">
+        <div class="form-grid">
+          <label>Disciplina<input name="subject" type="text" placeholder="Ex.: Programação" required></label>
+          <label>Sala<select name="room" required><option value="Sala A">Sala A</option><option value="Sala B">Sala B</option><option value="Sala C">Sala C</option></select></label>
+          <label>Data<input name="date" type="date" value="2026-08-18" required></label>
+          <label>Horário<select name="time" required><option>08:00 - 10:00</option><option>10:00 - 12:00</option><option>13:30 - 15:30</option><option>15:30 - 17:30</option><option>19:00 - 20:30</option><option>20:30 - 22:30</option></select></label>
+        </div>
+        <label>Observações<textarea name="notes" rows="3" placeholder="Adicione uma observação (opcional)"></textarea></label>
+        <div class="form-error" id="form-error" role="alert" hidden></div>
+        <div class="form-actions"><button class="edit-button" id="edit-booking-button" type="button" hidden>Editar</button><button class="delete-button" id="delete-booking-button" type="button" hidden>Excluir</button><button class="secondary-button modal-close" type="button">Cancelar</button><button class="primary-button" id="save-booking-button" type="submit">Salvar agendamento</button></div>
+      </form>
+      <div class="success-message" id="success-message" role="status" hidden>Agendamento salvo com sucesso.</div>
     </section>
   </div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="script.js"></script>
+
+  <div class="report-backdrop" id="report-modal" hidden>
+    <section class="report-panel" role="dialog" aria-modal="true" aria-labelledby="report-title">
+      <div class="report-toolbar">
+        <div><p class="eyebrow">SENAC <span></span> RELATÓRIO</p><h2 id="report-title">Relatório de reservas</h2><p id="report-period">Período: 18/08/2026 - 22/08/2026</p></div>
+        <div class="report-actions"><button class="secondary-button report-close" type="button">Fechar</button><button class="primary-button" id="print-report-button" type="button">Imprimir / Salvar PDF</button></div>
+      </div>
+      <div class="report-filters"><label>Tipo / disciplina<select id="report-type-filter"><option value="Todas as disciplinas">Todas as disciplinas</option></select></label><label>Sala<select id="report-room-filter"><option>Todas as salas</option><option>Sala A</option><option>Sala B</option><option>Sala C</option></select></label></div>
+      <div class="report-summary"><span><strong id="report-total">0</strong> reservas encontradas</span><span>Filtro: <strong id="report-room">Todas as salas</strong></span></div>
+      <div class="report-table-wrap"><table class="report-table"><thead><tr><th>Data</th><th>Disciplina</th><th>Sala</th><th>Período</th><th>Status</th></tr></thead><tbody id="report-body"></tbody></table></div>
+      <p class="empty-report" id="empty-report" hidden>Nenhuma reserva encontrada para os filtros selecionados.</p>
+    </section>
+  </div>
+
+  <script>
+    const sidebar = document.querySelector('.sidebar');
+    const bookingModal = document.querySelector('#booking-modal');
+    const bookingForm = document.querySelector('#booking-form');
+    const successMessage = document.querySelector('#success-message');
+    const modalTitle = document.querySelector('#modal-title');
+    const editBookingButton = document.querySelector('#edit-booking-button');
+    const deleteBookingButton = document.querySelector('#delete-booking-button');
+    const saveBookingButton = document.querySelector('#save-booking-button');
+    const formError = document.querySelector('#form-error');
+    const roomFilter = document.querySelector('#room-filter');
+    const dateFilter = document.querySelector('#date-filter');
+    const weekPicker = document.querySelector('#week-picker');
+    const dateRange = document.querySelector('.date-range');
+    const eyebrowDate = document.querySelector('.eyebrow');
+    const holidayNotice = document.querySelector('#holiday-notice');
+    const reportModal = document.querySelector('#report-modal');
+    const reportBody = document.querySelector('#report-body');
+    const emptyReport = document.querySelector('#empty-report');
+    const adminView = document.querySelector('.main-content');
+    const userView = document.querySelector('.user-view');
+    const loginScreen = document.querySelector('#login-screen');
+    const userBookingForm = document.querySelector('#user-booking-form');
+    const userFormError = document.querySelector('#user-form-error');
+    const userHistoryEmpty = document.querySelector('#user-history-empty');
+    const userHistoryList = document.querySelector('#user-history-list');
+    const reportTypeFilter = document.querySelector('#report-type-filter');
+    const reportRoomFilter = document.querySelector('#report-room-filter');
+    const baseDate = new Date(2026, 7, 18, 12);
+    const maxBookingDate = new Date(baseDate);
+    maxBookingDate.setMonth(maxBookingDate.getMonth() + 6);
+    weekPicker.min = dateForInput(baseDate);
+    weekPicker.max = dateForInput(maxBookingDate);
+    const holidays = {
+      '2026-01-01': 'Confraternização Universal',
+      '2026-02-16': 'Carnaval (ponto facultativo)',
+      '2026-02-17': 'Carnaval (ponto facultativo)',
+      '2026-04-03': 'Paixão de Cristo',
+      '2026-04-21': 'Tiradentes',
+      '2026-05-01': 'Dia Mundial do Trabalho',
+      '2026-06-04': 'Corpus Christi (ponto facultativo)',
+      '2026-09-07': 'Independência do Brasil',
+      '2026-10-12': 'Nossa Senhora Aparecida',
+      '2026-11-02': 'Finados',
+      '2026-11-15': 'Proclamação da República',
+      '2026-11-20': 'Consciência Negra',
+      '2026-12-25': 'Natal'
+    };
+    const dayNames = ['SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA'];
+    let weekOffset = 0;
+    let editingLesson = null;
+
+    function showUserView() {
+      loginScreen.hidden = true;
+      adminView.hidden = true;
+      userView.hidden = false;
+      document.querySelector('.sidebar').classList.add('user-mode');
+      userBookingForm.date.min = dateForInput(baseDate);
+      userBookingForm.date.max = dateForInput(maxBookingDate);
+      userBookingForm.date.value = dateForInput(getDisplayedWeekStart());
+    }
+
+    function showAdminView() {
+      loginScreen.hidden = true;
+      adminView.hidden = false;
+      userView.hidden = true;
+      document.querySelector('.sidebar').classList.remove('user-mode');
+    }
+
+    function showLogin() {
+      adminView.hidden = true;
+      userView.hidden = true;
+      document.querySelector('.sidebar').hidden = true;
+      loginScreen.hidden = false;
+      document.querySelector('#login-form input[name="email"]').focus();
+    }
+
+    function addUserHistory(formData) {
+      userHistoryEmpty.hidden = true;
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `<strong>${formData.get('subject')}</strong><span>${formData.get('date').split('-').reverse().join('/')} · ${formData.get('room')} · ${formData.get('time')}</span><em>Registrada</em>`;
+      userHistoryList.prepend(item);
+    }
+
+    function createLesson(formData) {
+      const bookingDate = new Date(`${formData.get('date')}T12:00:00`);
+      const daysFromBase = Math.round((bookingDate - baseDate) / 86400000);
+      const selectedWeekOffset = Math.floor(daysFromBase / 7);
+      if (selectedWeekOffset !== weekOffset) {
+        weekOffset = selectedWeekOffset;
+        updateWeek(0);
+      }
+      const dayIndex = daysFromBase - weekOffset * 7;
+      const periodIndex = formData.get('time').startsWith('08') || formData.get('time').startsWith('10') ? 0 : formData.get('time').startsWith('13') || formData.get('time').startsWith('15') ? 1 : 2;
+      const dayColumn = document.querySelectorAll('.schedule-row:not(.schedule-header)')[periodIndex]?.querySelectorAll('.lesson-col')[dayIndex];
+      if (!dayColumn) return null;
+      const newLesson = document.createElement('div');
+      newLesson.className = 'lesson custom newly-added';
+      newLesson.innerHTML = `<b>${formData.get('subject')}</b><span>${formData.get('time')} · ${formData.get('room')}</span>`;
+      newLesson.addEventListener('click', () => openEditModal(newLesson));
+      dayColumn.appendChild(newLesson);
+      return newLesson;
+    }
+
+    function setFormEditable(editable) {
+      bookingForm.querySelectorAll('input, select, textarea').forEach((field) => { field.disabled = !editable; });
+    }
+
+    function openBookingModal() {
+      editingLesson = null;
+      bookingModal.hidden = false;
+      successMessage.hidden = true;
+      formError.hidden = true;
+      bookingForm.hidden = false;
+      modalTitle.textContent = 'Novo agendamento';
+      editBookingButton.hidden = true;
+      deleteBookingButton.hidden = true;
+      saveBookingButton.hidden = false;
+      saveBookingButton.textContent = 'Salvar agendamento';
+      setFormEditable(true);
+      bookingForm.reset();
+      bookingForm.date.min = dateForInput(baseDate);
+      bookingForm.date.max = dateForInput(maxBookingDate);
+      const defaultDate = new Date(baseDate);
+      defaultDate.setDate(baseDate.getDate() + weekOffset * 7);
+      bookingForm.date.value = defaultDate.toISOString().slice(0, 10);
+      bookingForm.subject.focus();
+    }
+
+    function getDisplayedWeekStart() {
+      const firstDay = new Date(baseDate);
+      firstDay.setDate(baseDate.getDate() + weekOffset * 7);
+      return firstDay;
+    }
+
+    function dateForInput(date) {
+      return date.toISOString().slice(0, 10);
+    }
+
+    function openEditModal(lesson) {
+      const lessonColumn = lesson.closest('.lesson-col');
+      const scheduleRows = [...document.querySelectorAll('.schedule-row:not(.schedule-header)')];
+      const dayIndex = [...lessonColumn.parentElement.children].indexOf(lessonColumn) - 1;
+      const rowIndex = scheduleRows.indexOf(lesson.closest('.schedule-row'));
+      const lessonDetails = lesson.querySelector('span').textContent.split(' · ');
+      const lessonDate = getDisplayedWeekStart();
+      lessonDate.setDate(lessonDate.getDate() + dayIndex);
+      editingLesson = lesson;
+      bookingModal.hidden = false;
+      successMessage.hidden = true;
+      formError.hidden = true;
+      bookingForm.hidden = false;
+      modalTitle.textContent = 'Editar agendamento';
+      editBookingButton.hidden = false;
+      deleteBookingButton.hidden = false;
+      saveBookingButton.hidden = true;
+      setFormEditable(false);
+      bookingForm.subject.value = lesson.querySelector('b').textContent;
+      bookingForm.room.value = lessonDetails[1];
+      bookingForm.date.value = dateForInput(lessonDate);
+      bookingForm.time.selectedIndex = rowIndex === 0 ? (lessonDetails[0].startsWith('10') ? 1 : 0) : rowIndex === 1 ? (lessonDetails[0].startsWith('15') ? 3 : 2) : (lessonDetails[0].startsWith('20') ? 5 : 4);
+    }
+
+    function updateLesson(lesson, formData) {
+      const subject = formData.get('subject').toLowerCase();
+      const lessonClass = subject.includes('program') ? 'programming' : subject.includes('rede') ? 'networks' : subject.includes('engenharia') ? 'software' : subject.includes('banco') ? 'database' : subject.includes('sistema') ? 'systems' : subject.includes('intelig') ? 'artificial' : 'custom';
+      lesson.className = `lesson ${lessonClass}`;
+      lesson.innerHTML = `<b>${formData.get('subject')}</b><span>${formData.get('time')} · ${formData.get('room')}</span>`;
+    }
+
+    function getLessonData(lesson) {
+      const lessonColumn = lesson.closest('.lesson-col');
+      const scheduleRow = lesson.closest('.schedule-row');
+      const dayIndex = [...lessonColumn.parentElement.children].indexOf(lessonColumn) - 1;
+      const periodIndex = [...document.querySelectorAll('.schedule-row:not(.schedule-header)')].indexOf(scheduleRow);
+      const date = getDisplayedWeekStart();
+      date.setDate(date.getDate() + dayIndex);
+      const details = lesson.querySelector('span').textContent.split(' · ');
+      return { date: dateForInput(date), time: details[0], room: details[1], periodIndex, dayIndex };
+    }
+
+    function hasScheduleConflict(formData) {
+      const selected = { date: formData.get('date'), time: formData.get('time'), room: formData.get('room') };
+      return [...document.querySelectorAll('.lesson')].some((lesson) => {
+        if (lesson === editingLesson) return false;
+        const current = getLessonData(lesson);
+        return current.date === selected.date && current.time === selected.time && current.room === selected.room;
+      });
+    }
+
+    function showFormError(message) {
+      formError.textContent = message;
+      formError.hidden = false;
+    }
+
+    function highlightLesson(lesson) {
+      document.querySelectorAll('.lesson.highlighted-booking').forEach((item) => item.classList.remove('highlighted-booking'));
+      lesson.classList.add('highlighted-booking');
+      lesson.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      setTimeout(() => lesson.classList.remove('highlighted-booking'), 3000);
+    }
+
+    function isDateInDisplayedWeek(dateValue) {
+      const selectedDate = new Date(`${dateValue}T12:00:00`);
+      const weekStart = getDisplayedWeekStart();
+      const daysFromWeekStart = Math.round((selectedDate - weekStart) / 86400000);
+      return daysFromWeekStart >= 0 && daysFromWeekStart <= 4;
+    }
+
+    function isDateInBookingWindow(dateValue) {
+      const selectedDate = new Date(`${dateValue}T12:00:00`);
+      return selectedDate >= baseDate && selectedDate <= maxBookingDate;
+    }
+
+    function moveLessonToDate(lesson, formData) {
+      const bookingDate = new Date(`${formData.get('date')}T12:00:00`);
+      const daysFromBase = Math.round((bookingDate - baseDate) / 86400000);
+      const selectedWeekOffset = Math.floor(daysFromBase / 7);
+      if (selectedWeekOffset !== weekOffset) {
+        weekOffset = selectedWeekOffset;
+        updateWeek(0);
+      }
+      const dayIndex = daysFromBase - weekOffset * 7;
+      const periodIndex = formData.get('time').startsWith('08') || formData.get('time').startsWith('10') ? 0 : formData.get('time').startsWith('13') || formData.get('time').startsWith('15') ? 1 : 2;
+      const targetColumn = document.querySelectorAll('.schedule-row:not(.schedule-header)')[periodIndex]?.querySelectorAll('.lesson-col')[dayIndex];
+      if (targetColumn) targetColumn.appendChild(lesson);
+    }
+
+    function closeBookingModal() {
+      bookingModal.hidden = true;
+      editingLesson = null;
+    }
+
+    function formatDate(date) {
+      return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    }
+
+    function updateHolidayDisplay(firstDay) {
+      const weeklyHolidays = [];
+      document.querySelectorAll('.day-header').forEach((header, index) => {
+        const day = new Date(firstDay);
+        day.setDate(firstDay.getDate() + index);
+        const dateKey = dateForInput(day);
+        const holidayName = holidays[dateKey];
+        const monthLabel = day.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '').toUpperCase();
+        header.innerHTML = `${dayNames[index]} <small>${String(day.getDate()).padStart(2, '0')} ${monthLabel}</small>`;
+        header.classList.toggle('holiday-day', Boolean(holidayName));
+        if (holidayName) {
+          header.insertAdjacentHTML('beforeend', `<span class="holiday-label">Feriado</span>`);
+          weeklyHolidays.push(`${formatDate(day)}: ${holidayName}`);
+        }
+      });
+      holidayNotice.hidden = weeklyHolidays.length === 0;
+      holidayNotice.innerHTML = weeklyHolidays.length ? `<strong>Datas especiais nesta semana</strong><span>${weeklyHolidays.join(' · ')}</span>` : '';
+    }
+
+    function updateWeek(offset) {
+      const maxWeekOffset = Math.floor((maxBookingDate - baseDate) / 86400000 / 7);
+      weekOffset = Math.max(0, Math.min(maxWeekOffset, weekOffset + offset));
+      const firstDay = new Date(baseDate);
+      firstDay.setDate(baseDate.getDate() + weekOffset * 7);
+      const lastDay = new Date(firstDay);
+      lastDay.setDate(firstDay.getDate() + 4);
+      dateRange.innerHTML = `${formatDate(firstDay)} <b>—</b> ${formatDate(lastDay)}`;
+      eyebrowDate.innerHTML = `VISÃO GERAL <span></span> ${formatDate(firstDay).slice(0, 5)} A ${formatDate(lastDay).slice(0, 5)} ${lastDay.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '').toUpperCase()} ${lastDay.getFullYear()}`;
+      dateFilter.value = `${formatDate(firstDay)} - ${formatDate(lastDay)}`;
+      weekPicker.value = dateForInput(firstDay);
+      updateHolidayDisplay(firstDay);
+    }
+
+    function renderReport() {
+      const selectedType = reportTypeFilter.value;
+      const selectedRoom = reportRoomFilter.value;
+      const reportRows = [...document.querySelectorAll('.lesson')].filter((lesson) => {
+        const details = lesson.querySelector('span').textContent.split(' · ');
+        const matchesType = selectedType === 'Todas as disciplinas' || lesson.querySelector('b').textContent === selectedType;
+        const matchesRoom = selectedRoom === 'Todas as salas' || details[1] === selectedRoom;
+        return matchesType && matchesRoom;
+      }).map((lesson) => {
+        const data = getLessonData(lesson);
+        return { ...data, subject: lesson.querySelector('b').textContent };
+      }).sort((first, second) => `${first.date}${first.time}`.localeCompare(`${second.date}${second.time}`));
+      reportBody.innerHTML = reportRows.map((row) => `<tr><td>${row.date.split('-').reverse().join('/')}</td><td>${row.subject}</td><td>${row.room}</td><td>${row.time}</td><td><span class="report-status">Agendado</span></td></tr>`).join('');
+      document.querySelector('#report-total').textContent = reportRows.length;
+      document.querySelector('#report-room').textContent = `${selectedRoom} · ${selectedType}`;
+      document.querySelector('#report-period').textContent = `Período: ${dateFilter.value}`;
+      emptyReport.hidden = reportRows.length > 0;
+    }
+
+    function openReport() {
+      const subjects = [...new Set([...document.querySelectorAll('.lesson b')].map((lesson) => lesson.textContent))].sort();
+      reportTypeFilter.innerHTML = '<option value="Todas as disciplinas">Todas as disciplinas</option>' + subjects.map((subject) => `<option>${subject}</option>`).join('');
+      reportRoomFilter.value = roomFilter.value;
+      renderReport();
+      reportModal.hidden = false;
+    }
+
+    document.querySelector('.menu-button').addEventListener('click', () => sidebar.classList.toggle('collapsed'));
+    document.querySelector('#new-booking-button').addEventListener('click', openBookingModal);
+    document.querySelector('.new-booking-link').addEventListener('click', (event) => { event.preventDefault(); openBookingModal(); });
+    document.querySelector('.report-link').addEventListener('click', (event) => { event.preventDefault(); openReport(); });
+    document.querySelector('.user-area-link').addEventListener('click', (event) => { event.preventDefault(); showLogin(); });
+    document.querySelector('#login-form').addEventListener('submit', (event) => { event.preventDefault(); showUserView(); });
+    document.querySelector('.back-admin-button').addEventListener('click', () => { document.querySelector('.sidebar').hidden = false; showAdminView(); });
+    document.querySelectorAll('.user-room-card').forEach((card) => card.addEventListener('click', () => {
+      document.querySelector('#user-booking-form select[name="room"]').value = card.dataset.room;
+      document.querySelectorAll('.user-room-card').forEach((item) => item.classList.remove('selected'));
+      card.classList.add('selected');
+      document.querySelector('#user-booking-form input[name="subject"]').focus();
+    }));
+    document.querySelector('.report-close').addEventListener('click', () => { reportModal.hidden = true; });
+    reportTypeFilter.addEventListener('change', renderReport);
+    reportRoomFilter.addEventListener('change', renderReport);
+    document.querySelector('#print-report-button').addEventListener('click', () => {
+      document.body.classList.add('print-report');
+      window.print();
+      window.setTimeout(() => document.body.classList.remove('print-report'), 500);
+    });
+    document.querySelectorAll('.modal-close').forEach((button) => button.addEventListener('click', closeBookingModal));
+    bookingModal.addEventListener('click', (event) => { if (event.target === bookingModal) closeBookingModal(); });
+
+    roomFilter.addEventListener('change', () => {
+      const selectedRoom = roomFilter.value;
+      document.querySelectorAll('.lesson').forEach((lesson) => {
+        lesson.hidden = selectedRoom !== 'Todas as salas' && !lesson.textContent.includes(selectedRoom);
+      });
+    });
+
+    document.querySelector('.clear-button').addEventListener('click', () => {
+      roomFilter.value = 'Todas as salas';
+      dateFilter.value = '18/08/2026 - 22/08/2026';
+      document.querySelectorAll('.lesson').forEach((lesson) => { lesson.hidden = false; });
+      weekOffset = 0;
+      updateWeek(0);
+    });
+
+    dateFilter.addEventListener('click', () => {
+      if (typeof weekPicker.showPicker === 'function') weekPicker.showPicker();
+      else weekPicker.click();
+    });
+    weekPicker.addEventListener('change', () => {
+      const selectedDate = new Date(`${weekPicker.value}T12:00:00`);
+      const daysFromBase = Math.round((selectedDate - baseDate) / 86400000);
+      weekOffset = Math.floor(daysFromBase / 7);
+      updateWeek(0);
+    });
+
+    document.querySelector('.today-button').addEventListener('click', () => { weekOffset = 0; updateWeek(0); });
+    document.querySelector('[aria-label="Semana anterior"]').addEventListener('click', () => updateWeek(-1));
+    document.querySelector('[aria-label="Próxima semana"]').addEventListener('click', () => updateWeek(1));
+    document.querySelector('.notification-button').addEventListener('click', () => alert('Você não possui novas notificações.'));
+    document.querySelectorAll('.lesson').forEach((lesson) => lesson.addEventListener('click', () => openEditModal(lesson)));
+    editBookingButton.addEventListener('click', () => {
+      setFormEditable(true);
+      editBookingButton.hidden = true;
+      saveBookingButton.hidden = false;
+      saveBookingButton.textContent = 'Salvar alterações';
+      bookingForm.subject.focus();
+    });
+    deleteBookingButton.addEventListener('click', () => {
+      if (!editingLesson) return;
+      editingLesson.remove();
+      closeBookingModal();
+    });
+    bookingForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(bookingForm);
+      formError.hidden = true;
+      if (!isDateInBookingWindow(formData.get('date'))) {
+        showFormError(`Escolha uma data entre ${formatDate(baseDate)} e ${formatDate(maxBookingDate)}. O sistema permite agendamentos para até seis meses adiante.`);
+        return;
+      }
+      if (!isDateInDisplayedWeek(formData.get('date'))) {
+        showFormError('A data precisa estar dentro dos cinco dias da semana exibida na grade. Navegue até a semana desejada e tente novamente.');
+        return;
+      }
+      if (hasScheduleConflict(formData)) {
+        showFormError(`A ${formData.get('room')} já está ocupada em ${formData.get('date').split('-').reverse().join('/')} no horário de ${formData.get('time')}. Escolha outro horário ou sala.`);
+        return;
+      }
+      if (editingLesson) {
+        moveLessonToDate(editingLesson, formData);
+        updateLesson(editingLesson, formData);
+        highlightLesson(editingLesson);
+        bookingForm.hidden = true;
+        successMessage.textContent = 'Agendamento atualizado com sucesso.';
+        successMessage.hidden = false;
+        setTimeout(closeBookingModal, 1600);
+        return;
+      }
+      const bookingDate = new Date(`${formData.get('date')}T12:00:00`);
+      const daysFromBase = Math.round((bookingDate - baseDate) / 86400000);
+      const selectedWeekOffset = Math.floor(daysFromBase / 7);
+      if (selectedWeekOffset !== weekOffset) {
+        weekOffset = selectedWeekOffset;
+        updateWeek(0);
+      }
+      const dayIndex = daysFromBase - weekOffset * 7;
+      const periodIndex = formData.get('time').startsWith('08') || formData.get('time').startsWith('10') ? 0 : formData.get('time').startsWith('13') || formData.get('time').startsWith('15') ? 1 : 2;
+      const dayColumn = document.querySelectorAll('.schedule-row:not(.schedule-header)')[periodIndex]?.querySelectorAll('.lesson-col')[dayIndex];
+      if (dayColumn) {
+        const newLesson = document.createElement('div');
+        newLesson.className = 'lesson custom newly-added';
+        newLesson.innerHTML = `<b>${formData.get('subject')}</b><span>${formData.get('time')} · ${formData.get('room')}</span>`;
+        newLesson.addEventListener('click', () => openEditModal(newLesson));
+        dayColumn.appendChild(newLesson);
+        highlightLesson(newLesson);
+      }
+      bookingForm.hidden = true;
+      successMessage.hidden = false;
+      setTimeout(closeBookingModal, 1600);
+    });
+    userBookingForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(userBookingForm);
+      userFormError.hidden = true;
+      if (!isDateInBookingWindow(formData.get('date'))) {
+        userFormError.textContent = `Escolha uma data entre ${formatDate(baseDate)} e ${formatDate(maxBookingDate)}.`;
+        userFormError.hidden = false;
+        return;
+      }
+      const requestDate = new Date(`${formData.get('date')}T12:00:00`);
+      const requestDay = requestDate.getDay();
+      if (requestDay === 0 || requestDay === 6) {
+        userFormError.textContent = 'Escolha um dia útil de segunda a sexta-feira para solicitar a sala.';
+        userFormError.hidden = false;
+        return;
+      }
+      const selectedWeekOffset = Math.floor((requestDate - baseDate) / 86400000 / 7);
+      weekOffset = selectedWeekOffset;
+      updateWeek(0);
+      if (hasScheduleConflict(formData)) {
+        userFormError.textContent = `A ${formData.get('room')} já está ocupada nesse dia e horário. Escolha outra sala ou período.`;
+        userFormError.hidden = false;
+        return;
+      }
+      const lesson = createLesson(formData);
+      if (!lesson) return;
+      highlightLesson(lesson);
+      addUserHistory(formData);
+      userFormError.className = 'user-success';
+      userFormError.textContent = 'Solicitação registrada e adicionada à grade.';
+      userFormError.hidden = false;
+      userBookingForm.reset();
+      userBookingForm.date.value = dateForInput(getDisplayedWeekStart());
+    });
+    updateWeek(0);
+  </script>
 </body>
 </html>
