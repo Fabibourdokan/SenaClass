@@ -25,3 +25,11 @@ function existeConflito(novaReserva, reservas) {
     horariosConflitam(novaReserva, reserva)
   );
 }
+
+function cabeNaSala(quantidadeAlunos, salaId, salas) {
+  const sala = salas.find((sala) => sala.id === salaId);
+  return sala !== undefined &&
+    Number.isInteger(quantidadeAlunos) &&
+    quantidadeAlunos >= 0 &&
+    quantidadeAlunos <= sala.capacidade;
+}
