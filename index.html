@@ -180,6 +180,7 @@
     </section>
   </div>
 
+  <script src="reservas.js"></script>
   <script>
     const sidebar = document.querySelector('.sidebar');
     const bookingModal = document.querySelector('#booking-modal');
@@ -362,13 +363,21 @@
       return { date: dateForInput(date), time: details[0], room: details[1], periodIndex, dayIndex };
     }
 
+    function toReserva({ date, time, room }) {
+      const [inicio, fim] = time.split(' - ');
+      return { salaId: room, data: date, inicio, fim };
+    }
+
     function hasScheduleConflict(formData) {
-      const selected = { date: formData.get('date'), time: formData.get('time'), room: formData.get('room') };
-      return [...document.querySelectorAll('.lesson')].some((lesson) => {
-        if (lesson === editingLesson) return false;
-        const current = getLessonData(lesson);
-        return current.date === selected.date && current.time === selected.time && current.room === selected.room;
+      const novaReserva = toReserva({
+        date: formData.get('date'),
+        time: formData.get('time'),
+        room: formData.get('room')
       });
+      const reservasDaGrade = [...document.querySelectorAll('.lesson')]
+        .filter((lesson) => lesson !== editingLesson)
+        .map((lesson) => toReserva(getLessonData(lesson)));
+      return existeConflito(novaReserva, reservasDaGrade);
     }
 
     function showFormError(message) {
