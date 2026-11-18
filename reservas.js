@@ -11,3 +11,17 @@ const reservas = [
   { salaId: 'Sala C', data: '2026-11-24', inicio: '19:00', fim: '20:30', responsavel: 'Diego', finalidade: 'Aula de redes', situacao: 'aprovada' },
   { salaId: 'Sala B', data: '2026-11-25', inicio: '15:30', fim: '17:30', responsavel: 'Elisa', finalidade: 'Apresentação de projetos', situacao: 'pendente' }
 ];
+
+// Horários no formato HH:mm podem ser comparados diretamente.
+function horariosConflitam(primeiro, segundo) {
+  return primeiro.inicio < segundo.fim && segundo.inicio < primeiro.fim;
+}
+
+function existeConflito(novaReserva, reservas) {
+  return novaReserva.situacao !== 'cancelada' && reservas.some((reserva) =>
+    reserva.situacao !== 'cancelada' &&
+    reserva.salaId === novaReserva.salaId &&
+    reserva.data === novaReserva.data &&
+    horariosConflitam(novaReserva, reserva)
+  );
+}
